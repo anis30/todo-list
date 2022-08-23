@@ -10,8 +10,8 @@
 body {
   background: linear-gradient(
     90deg,
-    rgb(14, 14, 14) 0%,
-    rgb(57, 27, 86) 100%
+    rgb(253, 253, 253) 0%,
+    rgb(220, 212, 227) 100%
   );
 }
 app {
@@ -29,7 +29,7 @@ app {
 
 h2 {
   margin: 32px 0;
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-size: 24px;
 }
 
@@ -45,15 +45,15 @@ input {
   outline: none;
   width: 320px;
   background: transparent;
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 
 div{
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 
 input::placeholder {
-  color: #e2e2e2;
+  color: #000000;
 }
 
 button {
@@ -64,10 +64,10 @@ button {
   outline: none;
   background: linear-gradient(
     90deg,
-    rgb(17, 16, 16) 0%,
-    rgba(155, 0, 250, 1) 100%
+    rgb(27, 8, 39) 0%,
+    rgb(27, 8, 39) 100%
   );
-  color: #fff;
+  color: rgb(255, 255, 255);
   text-transform: capitalize;
 }
 
@@ -115,5 +115,5 @@ icons {
 }
 
 edit-icon {
-  color: #fff;
+  color: rgb(0, 0, 0);
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { TiEdit } from "react-icons/ti";
+import axios from "axios";
 
 function App() {
   const [todos, setTodos] = React.useState([]);
@@ -18,32 +19,45 @@ function App() {
   }, []); //retrieve data
 
   React.useEffect(() => {
-    const temp = JSON.stringify(todos);
-    localStorage.setItem("todos", temp);
-  }, [todos]); //saving data in local storage
+    // const temp = JSON.stringify(todos);
+    // localStorage.setItem("todos", temp);
+    axios
+      .get(`http://localhost:5000/users`)
+      .then((response) => setTodos(response.data))
+      .catch((error) => console.log(error));
+  }, []);
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(e) {
+    try {
+      e.preventDefault();
+      await axios.post(`http://localhost:5000/users`, { text: todo });
+      const newTodo = {
+        id: new Date().getTime(),
+        text: todo,
+      };
 
-    const newTodo = {
-      id: new Date().getTime(),
-      text: todo,
-    };
-
-    setTodos([...todos].concat(newTodo));
-    setTodo("");
+      setTodos([...todos].concat(newTodo));
+      setTodo("");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  function editTodo(id) {
-    const updatedTodos = [...todos].map((todo) => {
-      if (todo.id === id) {
-        todo.text = editText;
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-    setTodoEdit(null);
-    setEditText("");
+  async function editTodo(id) {
+    try {
+      const updatedTodos = [...todos].map((todo) => {
+        if (todo.id === id) {
+          todo.text = editText;
+        }
+        return todo;
+      });
+      setTodos(updatedTodos);
+      setTodoEdit(null);
+      setEditText("");
+      await axios.patch(`http://localhost:5000/users/${id}`, { text: editText });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
